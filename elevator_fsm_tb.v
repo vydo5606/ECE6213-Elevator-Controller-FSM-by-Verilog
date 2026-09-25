@@ -159,7 +159,7 @@ initial
                     floor_3_down_button_pressed, elevator_floor_1_button_pressed, 
                     elevator_floor_2_button_pressed, elevator_floor_3_button_pressed);
 
-        // test case 1: floor 1 to floor 2
+// test case 1: floor 1 to floor 2
         repeat(1)
         @(negedge clk);
         $display("Test Case 1: Floor 1 to Floor 2, pressed floor 1 up button: %b", floor_1_up_button_pressed);
@@ -186,7 +186,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 2: floor 1 to floor 3
+// test case 2: floor 1 to floor 3
         repeat(1)
         @(negedge clk);
         $display("Test Case 2: Floor 1 to Floor 3, pressed floor 1 up button: %b", floor_1_up_button_pressed);
@@ -213,7 +213,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 3: floor 2 to floor 3
+// test case 3: floor 2 to floor 3
         repeat(1)
         @(negedge clk);
         $display("Test Case 3: Floor 2 to Floor 3, pressed floor 2 up button: %b", floor_2_up_button_pressed);
@@ -240,7 +240,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 4: floor 2 to floor 1
+// test case 4: floor 2 to floor 1
         repeat(1)
         @(negedge clk);
         $display("Test Case 4: Floor 2 to Floor 1, pressed floor 2 down button: %b",floor_2_down_button_pressed);
@@ -267,7 +267,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 5: floor 3 to floor 2
+// test case 5: floor 3 to floor 2
         repeat(1)
         @(negedge clk);
         $display("Test Case 5: Floor 3 to Floor 2, pressed floor 3 down button: %b", floor_3_down_button_pressed);
@@ -294,7 +294,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 6: floor 3 to floor 1
+// test case 6: floor 3 to floor 1
         repeat(1)
         @(negedge clk);
         $display("Test Case 6: Floor 3 to Floor 1, pressed floor 3 down button: %b", floor_3_down_button_pressed);
@@ -321,7 +321,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 7: floor 1 to floor 3, pick up floor 2
+// test case 7: floor 1 to floor 3, pick up floor 2
         repeat(1)
         @(negedge clk);
         $display("Test Case 7: Floor 1 to Floor 3, pick up floor 2, pressed floor 1 up button: %b", floor_1_up_button_pressed);
@@ -339,9 +339,6 @@ initial
         repeat(1)
         @(negedge clk);
         elevator_floor_3_button_pressed = 0; // turn off the button
-
-        repeat(1)
-        @(negedge clk);
         $display("Test Case 7: Floor 1 to Floor 3, pick up floor 2, pressed floor 2 up button: %b", floor_2_up_button_pressed);
         floor_2_up_button_pressed = 1;
 
@@ -357,7 +354,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-        // test case 8: floor 3 to floor 1, pick up floor 2
+// test case 8: floor 3 to floor 1, pick up floor 2
         repeat(1)
         @(negedge clk);
         $display("Test Case 8: Floor 3 to Floor 1, pick up floor 2, pressed floor 3 down button: %b",floor_3_down_button_pressed );
@@ -375,9 +372,6 @@ initial
         repeat(1)
         @(negedge clk);
         elevator_floor_1_button_pressed = 0; // turn off the button
-
-        repeat(1)
-        @(negedge clk);
         $display("Test Case 8: Floor 3 to Floor 1, pick up floor 2, pressed floor 2 down button: %b",floor_2_down_button_pressed );
         floor_2_down_button_pressed = 1;
 
@@ -393,7 +387,7 @@ initial
         @(negedge clk);
         rst_n = 1; // reset the elevator
 
-    // test case 9: floor 1 to floor 3, passenger enter at floor 2 and press floor 1
+// test case 9: floor 1 to floor 3, passenger enter at floor 2 and press floor 1
         repeat(1)
         @(negedge clk);
         $display("Test Case 9: Floor 1 to Floor 3, enter at floor 2 and press floor 1, pressed floor 1 up button: %b", floor_1_up_button_pressed);
@@ -411,9 +405,6 @@ initial
         repeat(1)
         @(negedge clk);
         elevator_floor_3_button_pressed = 0; // turn off the button
-
-        repeat(1)
-        @(negedge clk);
         $display("Test Case 9: Floor 1 to Floor 3, enter at floor 2 and press floor 1, pressed floor 2 down button: %b", floor_2_down_button_pressed);
         floor_2_down_button_pressed = 1;
 
