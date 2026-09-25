@@ -48,6 +48,9 @@ module elevator_fsm
     parameter [3:0] S6_FLOOR_3_DOOR_CLOSE       = 4'd6;
     parameter [3:0] S7_FLOOR_1_TO_FLOOR_3       = 4'd7;
     parameter [3:0] S8_FLOOR_3_TO_FLOOR_1       = 4'd8;
+    parameter [3:0] S9_FLOOR_2_PICK_UP_13       = 4'd9;
+    parameter [3:0] S10_FLOOR_2_PICK_UP_31      = 4'd10;
+
 
 
     // update new state every clock cycle or reset cycle
@@ -113,7 +116,7 @@ module elevator_fsm
             end
 
             S3_FLOOR_2_DOOR_OPEN :
-            begin
+            begin 
                 state_next = S4_FLOOR_2_DOOR_CLOSE;
             end
 
@@ -157,8 +160,8 @@ module elevator_fsm
             // open door 2; otherwise, continue floor 3
             S7_FLOOR_1_TO_FLOOR_3:
             begin
-                if (floor_2_up_button == 1) 
-                state_next = S3_FLOOR_2_DOOR_OPEN;
+                if (floor_2_up_button == 1 || floor_2_down_button == 1) 
+                state_next = S9_FLOOR_2_PICK_UP_13;
 
                 else
                 state_next = S5_FLOOR_3_DOOR_OPEN;
@@ -168,10 +171,22 @@ module elevator_fsm
             // open door 2; otherwise, continue floor 1
             S8_FLOOR_3_TO_FLOOR_1:
             begin
-                if (floor_2_down_button == 1)
-                state_next = S3_FLOOR_2_DOOR_OPEN;
+                if (floor_2_down_button == 1 || floor_2_up_button == 1)
+                state_next = S10_FLOOR_2_PICK_UP_31;
 
                 else
+                state_next = S1_FLOOR_1_DOOR_OPEN;
+            end
+
+            S9_FLOOR_2_PICK_UP_13:
+            begin
+                if (elevator_floor_3_button == 1)
+                state_next = S5_FLOOR_3_DOOR_OPEN;
+            end
+
+            S10_FLOOR_2_PICK_UP_31:
+            begin
+                if (elevator_floor_1_button == 1)
                 state_next = S1_FLOOR_1_DOOR_OPEN;
             end
 
@@ -263,6 +278,40 @@ always @(*)
                     floor_3_down_button_clear = 1'd0;
                     elevator_floor_3_button_clear = 1'd0;
                 end
+
+            S7_FLOOR_1_TO_FLOOR_3 :
+            begin
+                if (floor_2_down_button == 1 || floor_2_up_button == 1)
+                elevator_door_open = 1'd1; //open door at floor 2
+
+                if (floor_2_up_button == 1'd1)
+                    floor_2_up_button_clear = 1'd1;
+                        
+                else if (floor_2_down_button == 1'd1)
+                    floor_2_down_button_clear = 1'd1;
+            end
+
+            S8_FLOOR_3_TO_FLOOR_1:
+            begin
+                if (floor_2_down_button == 1 || floor_2_up_button == 1)
+                elevator_door_open = 1'd1; //open door at floor 2 if button is pressed
+
+                if (floor_2_up_button == 1'd1)
+                    floor_2_up_button_clear = 1'd1;
+                        
+                else if (floor_2_down_button == 1'd1)
+                    floor_2_down_button_clear = 1'd1;
+            end
+
+            S9_FLOOR_2_PICK_UP_13:
+            begin
+                elevator_door_open = 1'd0; // close door for floor 2
+            end
+
+            S10_FLOOR_2_PICK_UP_31:
+            begin
+                elevator_door_open = 1'd0; // close door for floor 2
+            end
         endcase        
     end
 endmodule

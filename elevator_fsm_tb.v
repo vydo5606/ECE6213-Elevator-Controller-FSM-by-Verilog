@@ -411,9 +411,6 @@ initial
         repeat(1)
         @(negedge clk);
         floor_2_down_button_pressed = 0; // turn off the button
-
-        repeat(1)
-        @(negedge clk);
         $display("Test Case 9: Floor 1 to Floor 3, enter at floor 2 and press floor 1, pressed elevator floor 1 button: %b", elevator_floor_1_button_pressed);
         elevator_floor_1_button_pressed = 1;
 
@@ -421,7 +418,7 @@ initial
         @(negedge clk);
         elevator_floor_1_button_pressed = 0; // turn off the button
 
-        repeat(4)
+        repeat(8) // wait more until pressing reset
         @(negedge clk);
         rst_n = 0; // reset the elevator
 
